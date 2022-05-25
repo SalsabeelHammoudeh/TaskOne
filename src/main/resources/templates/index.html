@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to My Fist Task</title>
+    <link rel="stylesheet" th:href="@{./css/normalize.css}">
+    <link rel="stylesheet" th:href="@{./css/styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>Welcome to My Application</h2>
+                <br>
+                <br>
+                <a class="h2" th:href="@{/employees}">Manage Employees</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Employees </title>
+    <link rel="stylesheet" th:href="@{css/normalize.css}">
+    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Manage Employees</h2>
+            <div>
+                <a class="h3" th:href="@{/employees/new}">Add New Employee</a>
+            </div>
+            <div th:if="${message}" class="alert alert-success text-center">
+                [[${message}]]
+            </div>
+            <div>
+                <table class="table table-bordered">
+                    <thead class="thead-datrk">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Department</th>
+                        <th>Role</th>
+                        <th>Gender</th>
+                        <th>Base Salary</th>
+                        <th>Hire Date</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="employee : ${listEmployees}">
+                        <tr>
+                            <td>[[${employee.id}]]</td>
+                            <td>[[${employee.name}]]</td>
+                            <td>[[${employee.phoneNumber}]]</td>
+                            <td>[[${employee.address}]]</td>
+                            <td>[[${employee.department}]]</td>
+                            <td>[[${employee.role}]]</td>
+                            <td>[[${employee.gender}]]</td>
+                            <td>[[${employee.baseSalary}]]</td>
+                            <td>[[${employee.hireDate}]]</td>
+                            <td>
+                                <a class="h4 mr-3" th:href="@{'/employees/edit/' + ${employee.id}}">Edit</a>
+                                <a class="h4" th:href="@{'/employees/delete/' + ${employee.id}}">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
