@@ -11,5 +11,4 @@ public class EmployeeDto {
     private String role;
     private boolean gender;
     private double baseSalary;
-    private Address address = new Address();
 }

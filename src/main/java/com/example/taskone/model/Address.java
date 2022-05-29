@@ -1,8 +1,6 @@
 package com.example.taskone.model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -45,7 +43,7 @@ public class Address {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployeeس(Set<Employee> employees) {
         this.employees = employees;
     }
 }

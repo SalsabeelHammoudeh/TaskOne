@@ -1,5 +1,7 @@
 package com.example.taskone.service;
 
+import com.example.taskone.execption.DepartmentNotFoundException;
+import com.example.taskone.execption.EmployeeNotFoundException;
 import com.example.taskone.model.Address;
 import com.example.taskone.model.Department;
 import com.example.taskone.model.Employee;
@@ -33,18 +35,16 @@ public class DepartmentService {
         }
     }
     public void save(Department department) {
-
         repo.save(department);
     }
 
-    public Department get(Integer id){
-        Optional<Department> result = repo.findById(id);
-        if (result.isPresent()) {
-            return result.get();
-        }
-        else
-            return null;
+public Department get(Integer id) throws DepartmentNotFoundException {
+    Optional<Department> result = repo.findById(id);
+    if (result.isPresent()){
+        return result.get();
     }
+    throw new DepartmentNotFoundException("Could not find any users with ID "+ id);
+}
 
     public void delete(Integer id){
         Long count = repo.countById(id);

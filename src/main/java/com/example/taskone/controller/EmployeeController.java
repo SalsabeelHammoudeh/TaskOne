@@ -2,6 +2,9 @@ package com.example.taskone.controller;
 import com.example.taskone.dto.EmployeeDto;
 import com.example.taskone.execption.EmployeeNotFoundException;
 import com.example.taskone.model.Address;
+import com.example.taskone.model.Department;
+import com.example.taskone.service.AddressService;
+import com.example.taskone.service.DepartmentService;
 import com.example.taskone.service.EmployeeService;
 import com.example.taskone.model.Employee;
 import org.modelmapper.ModelMapper;
@@ -9,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,13 +24,11 @@ public class EmployeeController {
     private EmployeeService service;
 
     @Autowired
+    private AddressService service2;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-//    @GetMapping
-//    public List<Employee> showEmployeeList(){
-//        List<Employee> listEmployees = service.listAll();
-//        return listEmployees;
-//    }
     @GetMapping
     public ResponseEntity<List<Employee>> getAllEmployees(
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -48,18 +48,24 @@ public class EmployeeController {
     }
 
     @PutMapping("/edit/{id}")
-    public Employee editEmployee(@PathVariable("id") Integer id,RedirectAttributes ra){
+    public Employee editEmployee(@PathVariable("id") Integer id){
         try{
             Employee employee = service.get(id);
-
             employee.setAge(45);
+            Integer i = 1;
+            Address a = service2.get(i);
+            a.setLocation("new location");
+            employee.setAddress(a);
             System.out.println(employee.toString());
+//            Department d =new Department();
+//            d.setName();
             service.save(employee);
             return employee;
         }
         catch(EmployeeNotFoundException e){
             return null;
         }
+
     }
     @DeleteMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") Integer id, RedirectAttributes ra){
@@ -72,6 +78,7 @@ public class EmployeeController {
         }
         return "done deleting";
     }
+
     private Employee convertToEntity(EmployeeDto empDto){
         Employee employee = modelMapper.map(empDto, Employee.class);
         return employee;
@@ -80,15 +87,5 @@ public class EmployeeController {
         EmployeeDto empDto = modelMapper.map(e, EmployeeDto.class);
         return empDto;
     }
-//    private EmployeeDto convertToDto (Employee e){
-//        EmployeeDto empDto = new EmployeeDto();
-//        empDto.setAge(e.getAge());
-//        empDto.setGender(e.getGender());
-//        empDto.setBaseSalary(e.getBaseSalary());
-//        empDto.setId(e.getId());
-//        empDto.setRole(e.getRole());
-//        empDto.setName(e.getName());
-//        empDto.setPhoneNumber(e.getPhoneNumber());
-//        return empDto;
-//    }
+
 }

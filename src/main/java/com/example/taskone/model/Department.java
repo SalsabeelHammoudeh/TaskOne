@@ -21,7 +21,7 @@ public class Department {
     private Employee manager;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable( name = "depart_Emp",
                 joinColumns = { @JoinColumn (name = "depat_id")},
                 inverseJoinColumns = { @JoinColumn(name = "emp_id")})
@@ -57,5 +57,19 @@ public class Department {
 
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", manager=" + manager +
+                ", employees=" + employees +
+                '}';
+    }
+
+    public void addEmployee(Employee e) {
+        employees.add(e);
     }
 }

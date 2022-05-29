@@ -1,8 +1,6 @@
 package com.example.taskone.model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.*;
@@ -10,7 +8,6 @@ import java.util.*;
 import static java.util.Calendar.*;
 
 @Entity
-@JsonIgnoreProperties(ignoreUnknown=true)
 @Table(name = "employees")
 public class Employee {
     @Id
@@ -27,8 +24,8 @@ public class Employee {
     @Column(name = "phoneNumber", unique = true, length = 45)
     private String phoneNumber;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name="employee_Address", nullable = false)
     private Address address = new Address();
 
@@ -44,13 +41,16 @@ public class Employee {
     @Transient
     private double currentSalary;
 
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     @Column(name = "hireDate", length = 45)
     private Date hireDate;
 
     @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
     private Department manages;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employees")
+
+    @ManyToMany(mappedBy = "employees",cascade = CascadeType.ALL )
     private Set<Department> departments = new HashSet<>();
 
     public Employee() {
