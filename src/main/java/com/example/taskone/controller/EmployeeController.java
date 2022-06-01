@@ -56,10 +56,9 @@ public class EmployeeController {
             Address a = service2.get(i);
             a.setLocation("new location");
             employee.setAddress(a);
-            System.out.println(employee.toString());
-//            Department d =new Department();
-//            d.setName();
+            a.addEmployee(employee);
             service.save(employee);
+            service2.save(a);
             return employee;
         }
         catch(EmployeeNotFoundException e){
@@ -77,6 +76,32 @@ public class EmployeeController {
             ra.addFlashAttribute("message", e.getMessage());
         }
         return "done deleting";
+    }
+
+    @GetMapping("/managers")
+    public List<Employee> getAllManagers()
+    {
+        List<Employee> list = service.getAllManagers();
+        return list;
+    }
+
+    @GetMapping("/females")
+    public List<Employee> getAllFemales()
+    {
+        List<Employee> list = service.findByGender(false);
+        return list;
+    }
+    @GetMapping("/males")
+    public List<Employee> getAllMales()
+    {
+        List<Employee> list = service.findByGender(true);
+        return list;
+    }
+    @GetMapping("/department/{id}")
+    public List<String>  getEmployeesNamesOfDepartment(@PathVariable("id") Integer id)
+    {
+        List<String> list = service.employeesOfDepartment(id);
+        return list;
     }
 
     private Employee convertToEntity(EmployeeDto empDto){

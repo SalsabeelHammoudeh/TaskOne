@@ -1,5 +1,7 @@
 package com.example.taskone.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -46,10 +48,11 @@ public class Employee {
     @Column(name = "hireDate", length = 45)
     private Date hireDate;
 
+
     @OneToOne(mappedBy = "manager", cascade = CascadeType.ALL)
     private Department manages;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "employees",cascade = CascadeType.ALL )
     private Set<Department> departments = new HashSet<>();
 

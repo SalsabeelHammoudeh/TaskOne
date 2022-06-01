@@ -36,19 +36,24 @@ public class DepartmentController {
         return new ResponseEntity<List<Department>>(list, new HttpHeaders(), HttpStatus.OK);
     }
     @PostMapping("/save")
-    public String saveDepartment(@RequestBody Department  department) throws EmployeeNotFoundException {
-        Integer employeeId = 1;
-        Employee e = service2.get(employeeId);
-        e.setManages(department);
-        department.setManager(e);
+    public String saveDepartment(@RequestBody Department  department){
         service.save(department);
         return "saved";
     }
-
+    @PostMapping("/{departmentId}/manager/{employeeId}")
+    public String setManager(@PathVariable Integer departmentId, @PathVariable Integer employeeId ) throws DepartmentNotFoundException, EmployeeNotFoundException{
+        Employee e = service2.get(employeeId);
+        Department department = service.get(departmentId);
+        e.setManages(department);
+        department.setManager(e);
+        service.save(department);
+        service2.save(e);
+        return "saved";
+    }
     @PutMapping("/edit/{id}")
     public String editDepartment(@PathVariable("id") Integer id, RedirectAttributes ra) throws EmployeeNotFoundException,DepartmentNotFoundException {
         Department department = service.get(id);
-        department.setName("hi dep");
+        department.setName("hi dep hi");
         service.save(department);
         return "done editing";
 
@@ -60,6 +65,7 @@ public class DepartmentController {
         Employee e = service2.get(employeeId);
         d.addEmployee(e);
         service.save(d);
+        service2.save(e);
         return d;
     }
 

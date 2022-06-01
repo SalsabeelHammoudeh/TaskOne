@@ -43,7 +43,11 @@ public class Address {
         return employees;
     }
 
-    public void setEmployeeس(Set<Employee> employees) {
+    public void setEmployee(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public void addEmployee(Employee e) {
+        employees.add(e);
     }
 }

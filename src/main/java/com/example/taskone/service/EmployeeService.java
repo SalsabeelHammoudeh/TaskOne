@@ -56,4 +56,18 @@ public class EmployeeService {
         }
     }
 
+    public List<Employee> getAllManagers() {
+        List<Employee> managers = repo.findAllManagers();
+        return managers;
+    }
+
+    public List<Employee> findByGender(boolean g) {
+        List<Employee> employees = repo.findByGender(g);
+        return employees;
+    }
+    public List<String> employeesOfDepartment(Integer departmentId) {
+        List<String> employees = repo.employeesNamesOfDepartment(departmentId);
+        return employees;
+    }
+
 }

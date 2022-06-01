@@ -1,4 +1,8 @@
 package com.example.taskone.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +19,7 @@ public class Department {
     @Column(name = "name", length = 60)
     private String name;
 
-
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "depart_manager", referencedColumnName = "id")
     private Employee manager;
@@ -25,6 +29,7 @@ public class Department {
     @JoinTable( name = "depart_Emp",
                 joinColumns = { @JoinColumn (name = "depat_id")},
                 inverseJoinColumns = { @JoinColumn(name = "emp_id")})
+    @JsonIgnore
     private Set<Employee> employees = new HashSet<>();
 
     public Integer getId() {
