@@ -12,6 +12,6 @@
 >* support pagination and sorting (sort by whatever you want)
 >* In addition to basic CRUD APIs (GET,POST,PUT,DELETE) you need to implement the following:
 >
->a. get all names of employees who work in the specific department.
->b. get employees by gender
->c. get all managers of departments
+>+ get all names of employees who work in the specific department.
+>+ get employees by gender
+>+ get all managers of departments
