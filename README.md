@@ -1,5 +1,5 @@
->You need to implement a back-end server side using spring, jpa and rest APIs. 
->Use the following models:
+>#You need to implement a back-end server side using spring, jpa and rest APIs. 
+>##Use the following models:
 >
 >1.	Employee(id,name,age,phoneNumer,address,gender,baseSalaray,currentSalary,hireDate,currentSalary,department,role)
 >2.	Department(id,name,employees,manager)
@@ -10,8 +10,8 @@
 >* Each employee has only one address, but the same address can belong to more than one employee
 >* currentSalary of the employee is not present in the database and should be calculated according to the hire date(every year before current year equals 200$ + the base >salary)
 >* support pagination and sorting (sort by whatever you want)
->* In addition to basic CRUD APIs (GET,POST,PUT,DELETE) you need to implement the following:
+>## In addition to basic CRUD APIs (GET,POST,PUT,DELETE) you need to implement the following:
 >
->+ get all names of employees who work in the specific department.
->+ get employees by gender
->+ get all managers of departments
+>1. get all names of employees who work in the specific department.
+>2. get employees by gender
+>3. get all managers of departments
